@@ -42,7 +42,7 @@ $RECYCLE.BIN/
 
 # Java specific
 *.class
-*.jar
+# *.jar
 *.war
 *.ear
 hs_err_pid*
