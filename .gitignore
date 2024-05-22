@@ -1,0 +1,107 @@
+# IntelliJ IDEA
+.idea/
+*.iws
+*.iml
+*.ipr
+out/
+
+# Fleet
+.fleet/
+
+# Gradle
+.gradle/
+build/
+**/build/
+
+# Kotlin specific
+.kotlin/
+
+# Android specific
+*.apk
+*.ap_
+*.dex
+*.class
+*.so
+*.swp
+*.iml
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+
+# Linux
+*~
+# temporary files which can be created if a process still has a handle open of a deleted file
+.fuse_hidden*
+.nfs*
+
+# Java specific
+*.class
+*.jar
+*.war
+*.ear
+hs_err_pid*
+*.log
+
+# Project-specific caches and logs
+**/out/
+**/build/
+**/.gradle/
+**/.idea/
+**/buildSrc/.gradle/
+**/buildSrc/.idea/
+**/.idea/workspace.xml
+**/.idea/usage.statistics.xml
+**/.idea/assetWizardSettings.xml
+**/.idea/dictionaries
+**/.idea/libraries
+**/.idea/modules.xml
+**/.idea/gradle.xml
+**/.idea/compiler.xml
+**/.idea/encodings.xml
+**/.idea/inspectionProfiles
+**/.idea/vcs.xml
+**/.idea/tasks.xml
+**/.idea/jsLibraryMappings.xml
+**/.idea/assetWizardSettings.xml
+**/.idea/webResources.xml
+**/.idea/tasks.xml
+**/.idea/assetWizardSettings.xml
+**/.idea/codeStyles
+**/.idea/codeStyles.xml
+**/.idea/codeStyles/Project.xml
+**/.idea/codeStyles/codeStyleConfig.xml
+
+# JUnit
+.junit/
+
+# Android specific
+**/captures/
+
+# Maven specific
+**/target/
+
+# Node specific
+node_modules/
+yarn.lock
+
+# log files
+*.log
+
+# Editor folders and files
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Local configuration file
+local.properties
+
+# Miscellaneous
+*.swp
+*.swo
+*~
