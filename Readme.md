@@ -1,11 +1,11 @@
-# Kotik: BPE Tokeniser
+# Kotok: BPE Tokeniser
 
-Kotik is a multiplatform library written in Kotlin. It is effectively a BPE (Byte Pair Encoding) tokeniser.
+Kotok is a multiplatform library written in Kotlin. It is effectively a BPE (Byte Pair Encoding) tokeniser.
 It's developed to operate efficiently across varying platforms.
 
 ## Installation
 
-To include Kotik in your project, implement the following in your build.gradle file:
+To include Kotok in your project, implement the following in your build.gradle file:
 
 ```kotlin
 dependencies {
@@ -15,7 +15,7 @@ dependencies {
 
 ## Usage
 
-After installation, you can utilize Kotik as follows:
+After installation, you can utilize Kotok as follows:
 
 
 ## License

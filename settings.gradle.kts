@@ -13,5 +13,5 @@ plugins {
     id("org.jetbrains.amper.settings.plugin").version("0.3.0")
 }
 
-rootProject.name = "Kotik"
-include("kotik")
+rootProject.name = "Kotok"
+include("kotok")
