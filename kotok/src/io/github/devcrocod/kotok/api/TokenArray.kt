@@ -94,25 +94,34 @@ public class TokenArray internal constructor(private var array: IntArray, size: 
 
     public fun toIntArray(): IntArray = array.copyOf(size)
 
-    public fun toList(): List<Int> = array.toList()
+    public fun toList(): List<Int> = array.copyOf(size).toList()
 
     public override fun equals(other: Any?): Boolean {
         return when {
             this === other -> true
             other !is TokenArray || size != other.size -> false
-            else -> array.contentEquals(other.array)
+            else -> {
+                var eq = true
+                for (i in 0 until size) {
+                    if (array[i] != other.array[i]) {
+                        eq = false
+                        break
+                    }
+                }
+                eq
+            }
         }
     }
 
     public override fun hashCode(): Int {
         var result = 1
-        for (item in array) {
-            result = 31 * result + item
+        for (i in 0 until size) {
+            result = 31 * result + array[i]
         }
         return result
     }
     
     public override fun toString(): String {
-        return array.contentToString()
+        return array.copyOf(size).asList().toString()
     }
 }
