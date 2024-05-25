@@ -1,6 +1,5 @@
-package io.github.devcrocod.kotok.bpe
+package io.github.devcrocod.kotok
 
-import io.github.devcrocod.kotok.ByteArrayList
 import kotlin.random.Random
 import kotlin.test.Test
 import kotlin.test.assertEquals
