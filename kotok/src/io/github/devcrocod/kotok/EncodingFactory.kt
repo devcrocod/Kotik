@@ -4,6 +4,9 @@ import io.github.devcrocod.kotok.Cl100kParser.split
 import io.github.devcrocod.kotok.api.Encoding
 import io.github.devcrocod.kotok.api.GptBytePairEncodingParams
 import io.github.devcrocod.kotok.api.TokenArray
+import io.github.devcrocod.kotok.internal.pathToCl100kBase
+import io.github.devcrocod.kotok.internal.pathToP50kBase
+import io.github.devcrocod.kotok.internal.pathToR50kBase
 import kotlinx.io.Source
 import kotlinx.io.readLine
 import kotlin.io.encoding.Base64
@@ -40,24 +43,24 @@ public object EncodingFactory {
 
     public fun r50kBase(): Encoding = from50kParameters(
         "r50k_base",
-        "/io/github/devcrocod/r50k_base.tiktoken",
+        pathToR50kBase,
         SPECIAL_TOKENS_X50K_BASE
     )
 
     public fun p50kBase(): Encoding = from50kParameters(
         "p50k_base",
-        "/io/github/devcrocod/p50k_base.tiktoken",
+        pathToP50kBase,
         SPECIAL_TOKENS_X50K_BASE
     )
 
     public fun p50kEdit(): Encoding = from50kParameters(
         "p50k_edit",
-        "/io/github/devcrocod/p50k_base.tiktoken",
+        pathToP50kBase,
         SPECIAL_TOKENS_P50K_EDIT
     )
 
     public fun cl100kBase(): Encoding {
-        val mergeableRanks = loadMergeableRanks("/io/github/devcrocod/cl100k_base.tiktoken")
+        val mergeableRanks = loadMergeableRanks(pathToCl100kBase)
         val params: GptBytePairEncodingParams =
             GptBytePairEncodingParams("cl100k_base", null, mergeableRanks, SPECIAL_TOKENS_CL100K_BASE)
         return Cl100kGptBytePairEncoding(params)

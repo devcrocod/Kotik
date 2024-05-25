@@ -1,5 +1,6 @@
 package io.github.devcrocod.kotok
 
+import io.github.devcrocod.kotok.internal.resourceURLs
 import io.ktor.client.*
 import io.ktor.client.request.*
 import io.ktor.client.statement.*
@@ -9,12 +10,6 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import kotlinx.io.IOException
 import kotlinx.io.Source
-
-private val urls = mapOf(
-    "/io/github/devcrocod/cl100k_base.tiktoken" to "https://raw.githubusercontent.com/devcrocod/kotok/main/kotok/src@jvmA/io/github/devcrocod/cl100k_base.tiktoken",
-    "/io/github/devcrocod/p50k_base.tiktoken" to "https://raw.githubusercontent.com/devcrocod/kotok/main/kotok/src@jvmA/io/github/devcrocod/p50k_base.tiktoken",
-    "/io/github/devcrocod/r50k_base.tiktoken" to "https://raw.githubusercontent.com/devcrocod/kotok/main/kotok/src@jvmA/io/github/devcrocod/r50k_base.tiktoken"
-)
 
 private val resourceCache = mutableMapOf<String, Source?>()
 private val loadingStatus = mutableMapOf<String, Boolean>()
@@ -40,10 +35,9 @@ private fun loadResourceAsync(fileName: String) {
     loadingStatus[fileName] = true
 
     GlobalScope.launch {
-        val url = "https://raw.githubusercontent.com/devcrocod/kotok/main/kotok/src/commonMain/resources/$fileName"
         client.use { httpClient ->
             val buffer = kotlinx.io.Buffer()
-            buffer.write(httpClient.get(urls[fileName]!!).readBytes())
+            buffer.write(httpClient.get(resourceURLs[fileName]!!).readBytes())
             resourceCache[fileName] = buffer
         }
     }
