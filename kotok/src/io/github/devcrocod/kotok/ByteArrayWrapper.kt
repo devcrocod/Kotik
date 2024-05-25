@@ -21,6 +21,14 @@ public value class ByteArrayWrapper(private val array: ByteArray) {
         return ByteArrayWrapper(result)
     }
 
+    public fun contentEquals(other: Any?): Boolean {
+        return when {
+            this == other -> true
+            other !is ByteArrayWrapper || size != other.size -> false
+            else -> array.contentEquals(other.array)
+        }
+    }
+
     override fun toString(): String {
         return array.contentToString()
     }
