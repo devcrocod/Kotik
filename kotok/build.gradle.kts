@@ -9,19 +9,42 @@ plugins {
     alias(libs.plugins.dokka)
 }
 
+
+repositories {
+    mavenCentral()
+    google()
+    maven("https://maven.pkg.jetbrains.space/kotlin/p/wasm/experimental")
+}
+
+java {
+    toolchain { languageVersion.set(JavaLanguageVersion.of(11)) } // TODO
+}
+
+
 kotlin {
     explicitApi()
-    
+
     androidTarget()
     jvm()
     iosArm64()
     iosSimulatorArm64()
     iosX64()
     wasmJs()
-    
+
+    sourceSets.all {
+        val suffixIndex = name.indexOfLast { it.isUpperCase() }
+        val targetName = name.substring(0, suffixIndex)
+        val suffix = name.substring(suffixIndex).lowercase().takeIf { it != "main" }
+        kotlin.srcDir("$targetName/${suffix ?: "src"}")
+        resources.srcDir("$targetName/${suffix?.let { it + "Resources" } ?: "resources"}")
+
+    }
+
     sourceSets {
         val commonMain by getting {
-            
+            dependencies {
+                implementation(libs.kotlinx.io)
+            }
         }
         val commonTest by getting {
             dependencies {
@@ -29,13 +52,26 @@ kotlin {
             }
         }
         val jvmMain by getting {
-            dependsOn(commonMain)
         }
-        val jvmAndAndroid by creating {
+        val jvmAndAndroidMain by creating {
             dependsOn(jvmMain)
         }
-        val jvm22 by creating {
-            dependsOn(commonMain)
+        val jvm22Main by creating {
+            dependsOn(jvmMain)
+        }
+        val iosMain by creating {
+            dependsOn(nativeMain.get())
+            dependencies {
+                implementation(libs.ktor.core)
+                implementation(libs.ktor.darwin)
+                implementation(libs.coroutines.core)
+            }
+        }
+        val wasmJsMain by getting {
+            dependencies {
+                implementation(libs.ktor.core.wasm)
+                implementation(libs.coroutines.core.wasm)
+            }
         }
     }
 }

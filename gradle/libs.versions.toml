@@ -1,5 +1,5 @@
 [versions]
-agp = "8.2.0"
+agp = "8.2.2"
 android-minSdk = "24"
 android-compileSdk = "33"
 kotlin = "2.0.0"
@@ -7,7 +7,7 @@ ktor = "3.0.0-beta-1"
 ktorWasm = "3.2.0"
 coroutines = "1.8.1"
 coroutinesWasm = "1.8.0-RC2-wasm0"
-kotlin-io = "0.3.5"
+kotlinx-io = "0.3.5"
 dokka = "1.9.20"
 
 [libraries]
@@ -18,7 +18,9 @@ coroutines-core-wasm = { group = "org.jetbrains.kotlinx", name = "kotlinx-corout
 # Ktor
 ktor-core = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktor" }
 ktor-darwin = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktor" }
-ktor-core-wasm = { group = "io.ktor", name = "ktor-client-darwin", version.ref = "ktorWasm" }
+ktor-core-wasm = { group = "io.ktor", name = "ktor-client-core", version.ref = "ktorWasm" }
+# IO
+kotlinx-io = { group = "org.jetbrains.kotlinx", name = "kotlinx-io-core", version.ref = "kotlinx-io" }
 
 [plugins]
 android-lib = { id = "com.android.library", version.ref = "agp" }
