@@ -1,9 +1,6 @@
 package io.github.devcrocod.kotok
 
-import kotlin.jvm.JvmInline
-
-@JvmInline
-public value class ByteArrayWrapper(private val array: ByteArray) {
+public class ByteArrayWrapper(private val array: ByteArray) {
 
     public val size: Int
         get() = array.size
@@ -11,7 +8,7 @@ public value class ByteArrayWrapper(private val array: ByteArray) {
     public fun getBytesBetween(start: Int, end: Int): ByteArrayWrapper {
         when {
             start < 0 || start >= array.size -> throw IndexOutOfBoundsException("Start index out of bounds: $start")
-            end < 0 || end >= array.size -> throw IndexOutOfBoundsException("End index out of bounds: $start")
+            end < 0 || end > array.size -> throw IndexOutOfBoundsException("End index out of bounds: $start")
             start >= end -> throw IndexOutOfBoundsException("Start index must be less than end index: $start >= $end")
         }
 
@@ -21,12 +18,16 @@ public value class ByteArrayWrapper(private val array: ByteArray) {
         return ByteArrayWrapper(result)
     }
 
-    public fun contentEquals(other: Any?): Boolean {
+    public override fun equals(other: Any?): Boolean {
         return when {
-            this == other -> true
+            this === other -> true
             other !is ByteArrayWrapper || size != other.size -> false
             else -> array.contentEquals(other.array)
         }
+    }
+
+    public override fun hashCode(): Int {
+        return array.contentHashCode()
     }
 
     override fun toString(): String {

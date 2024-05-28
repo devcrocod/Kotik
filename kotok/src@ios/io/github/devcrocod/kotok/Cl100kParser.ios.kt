@@ -6,7 +6,7 @@ import platform.Foundation.NSUTF8StringEncoding
 import platform.Foundation.create
 import platform.Foundation.dataUsingEncoding
 
-internal actual fun String.codePointAt(index: Int): Int {
+internal actual fun String.codePointByIndex(index: Int): Int {
     if (index < 0 || index >= this.length) {
         throw IndexOutOfBoundsException("Index: $index, Length: ${this.length}")
     }

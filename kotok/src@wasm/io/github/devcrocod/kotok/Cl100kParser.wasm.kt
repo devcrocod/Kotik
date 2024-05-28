@@ -1,6 +1,6 @@
 package io.github.devcrocod.kotok
 
-internal actual fun String.codePointAt(index: Int): Int {
+internal actual fun String.codePointByIndex(index: Int): Int {
     if (index < 0 || index >= this.length) {
         throw IndexOutOfBoundsException("Index: $index, Length: ${this.length}")
     }

@@ -83,9 +83,6 @@ hs_err_pid*
 # Android specific
 **/captures/
 
-# Maven specific
-**/target/
-
 # Node specific
 node_modules/
 yarn.lock
@@ -105,3 +102,6 @@ local.properties
 *.swp
 *.swo
 *~
+
+Cargo.lock
+target/

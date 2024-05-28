@@ -1,6 +1,7 @@
 package io.github.devcrocod.kotok
 
 import kotlin.test.Test
+import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
 import kotlin.test.assertTrue
 
@@ -9,7 +10,7 @@ class ByteArrayWrapperTest {
     @Test
     fun `get bytes between returns correct slice of array`() {
         val byteArray = ByteArrayWrapper(byteArrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9))
-        assertTrue(ByteArrayWrapper(byteArrayOf(4, 5, 6)).contentEquals(byteArray.getBytesBetween(3, 6)))
+        assertEquals(ByteArrayWrapper(byteArrayOf(4, 5, 6)), (byteArray.getBytesBetween(3, 6)))
     }
 
     @Test

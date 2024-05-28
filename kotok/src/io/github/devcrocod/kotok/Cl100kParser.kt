@@ -1,7 +1,7 @@
 package io.github.devcrocod.kotok
 
 
-internal expect fun String.codePointAt(index: Int): Int
+internal expect fun String.codePointByIndex(index: Int): Int
 
 internal expect fun String.isValidUtf8(): Boolean
 
@@ -26,10 +26,10 @@ internal object Cl100kParser {
 
         while (endIndex < input.length && !finished) {
             val startIndex = endIndex
-            val c0 = input.codePointAt(startIndex)
+            val c0 = input.codePointByIndex(startIndex)
             val cc0 = if (c0 >= 0x010000) 2 else 1
             val nextIndex = startIndex + cc0
-            val c1 = if (nextIndex < input.length) input.codePointAt(nextIndex) else -1
+            val c1 = if (nextIndex < input.length) input.codePointByIndex(nextIndex) else -1
 
             when {
                 (c0.toChar() == '\'') && c1 > 0 -> {
@@ -40,7 +40,7 @@ internal object Cl100kParser {
                             continue
                         }
 
-                        startIndex + 2 < input.length && isLongContraction(c1, input.codePointAt(startIndex + 2)) -> {
+                        startIndex + 2 < input.length && isLongContraction(c1, input.codePointByIndex(startIndex + 2)) -> {
                             endIndex += 3
                             finished = fragConsumer(addUtf8Bytes(input, startIndex, endIndex, utf8Bytes))
                             continue
@@ -52,8 +52,8 @@ internal object Cl100kParser {
                     endIndex += cc0
                     if (isLetter(c1)) {
                         endIndex += c1.charCount()
-                        while (endIndex < input.length && isLetter(input.codePointAt(endIndex))) {
-                            endIndex += input.codePointAt(endIndex).charCount()
+                        while (endIndex < input.length && isLetter(input.codePointByIndex(endIndex))) {
+                            endIndex += input.codePointByIndex(endIndex).charCount()
                         }
                     }
                     finished = fragConsumer(addUtf8Bytes(input, startIndex, endIndex, utf8Bytes))
@@ -63,8 +63,8 @@ internal object Cl100kParser {
                     endIndex += cc0
                     if (isNumeric(c1)) {
                         endIndex += c1.charCount()
-                        if (endIndex < input.length && isNumeric(input.codePointAt(endIndex))) {
-                            endIndex += input.codePointAt(endIndex).charCount()
+                        if (endIndex < input.length && isNumeric(input.codePointByIndex(endIndex))) {
+                            endIndex += input.codePointByIndex(endIndex).charCount()
                         }
                     }
                     finished = fragConsumer(addUtf8Bytes(input, startIndex, endIndex, utf8Bytes))
@@ -74,11 +74,11 @@ internal object Cl100kParser {
                     endIndex += cc0
                     if (endIndex < input.length && isNotWhitespaceOrLetterOrNumeric(c1)) {
                         endIndex += c1.charCount()
-                        while (endIndex < input.length && isNotWhitespaceOrLetterOrNumeric(input.codePointAt(endIndex))) {
-                            endIndex += input.codePointAt(endIndex).charCount()
+                        while (endIndex < input.length && isNotWhitespaceOrLetterOrNumeric(input.codePointByIndex(endIndex))) {
+                            endIndex += input.codePointByIndex(endIndex).charCount()
                         }
                     }
-                    while (endIndex < input.length && isNewline(input.codePointAt(endIndex))) {
+                    while (endIndex < input.length && isNewline(input.codePointByIndex(endIndex))) {
                         endIndex++
                     }
                     finished = fragConsumer(addUtf8Bytes(input, startIndex, endIndex, utf8Bytes))
@@ -91,10 +91,10 @@ internal object Cl100kParser {
                     if (isWhitespace(c1)) {
                         lastNewLineIndex = if (isNewline(c1)) endIndex else lastNewLineIndex
                         endIndex += c1.charCount()
-                        while (endIndex < input.length && isWhitespace(input.codePointAt(endIndex))) {
+                        while (endIndex < input.length && isWhitespace(input.codePointByIndex(endIndex))) {
                             lastNewLineIndex =
-                                if (isNewline(input.codePointAt(endIndex))) endIndex else lastNewLineIndex
-                            endIndex += input.codePointAt(endIndex).charCount()
+                                if (isNewline(input.codePointByIndex(endIndex))) endIndex else lastNewLineIndex
+                            endIndex += input.codePointByIndex(endIndex).charCount()
                         }
                     }
 
@@ -168,7 +168,7 @@ internal object Cl100kParser {
         dst.clear()
         var i = start
         while (i < end) {
-            val cp = input.codePointAt(i)
+            val cp = input.codePointByIndex(i)
             when {
                 cp < 0x80 -> dst.add(cp.toByte())
                 cp < 0x800 -> {

@@ -1,3 +1,5 @@
 plugins {
-    id("org.jetbrains.kotlin.plugin.atomicfu") version "2.0.0"
+    alias(lib.plugins.android.lib).apply(false)
+    alias(libs.plugins.multiplatform).apply(false)
+    alias(lib.plugins.dokka).apply(false)
 }
